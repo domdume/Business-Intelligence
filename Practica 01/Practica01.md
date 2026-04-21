@@ -54,9 +54,54 @@ El archivo de salida generado muestra los datos perfectamente organizados en col
 
 ## Ejemplo 2
 
-Descripción:
+Descripción: Json Input, Select Values, Sort Rows y Json out
+ 
+Se seleccionó el componente **Json Input**. 
+<img width="435" height="157" alt="image" src="https://github.com/user-attachments/assets/06229da5-bb49-48df-a053-0b5528cf510a" />
 
-Resultados:
+Para los datos, se ha descargado datoos de prueba de una pagina y guardado en un archivo `.json` llamado DatosJson.  
+1. Se seleccionó browse, para buscar el archivo de prueba. 
+2. Se añadió el archivo DatosJson. 
+
+<img width="500" height="272" alt="image" src="https://github.com/user-attachments/assets/c605284f-a48a-447e-a06b-efbc22d87c28" />
+
+Se cargaron todas las columnas de los datos del json utilizando el select field 
+
+<img width="705" height="309" alt="image" src="https://github.com/user-attachments/assets/e2647c1f-f195-43f4-a820-111054fffc13" />
+
+Lo que se hara a continuación es transformar esos datos en información, eliminando las columnas de la ubicación geográfica exacta, ordenar por nombre de la compania, con el objetivo de ordenar y cargar esa información en una tabla.
+
+<img width="642" height="102" alt="image" src="https://github.com/user-attachments/assets/43e2eab6-4436-411a-9a5d-4ce4cce97b54" />
+
+En **Select values**  
+
+1. Seleccionar remove
+2. Escribimos las columnas que queremos eliminar, en este caso lat, lng, zipecode, bs y catchPhrase. 
+
+<img width="395" height="159" alt="image" src="https://github.com/user-attachments/assets/70692b3c-5ee2-48d9-b8c9-3c4a8d5417a1" />
+
+**Sort Rows** 
+Para ordenar por companias seleccionamos en la fieldname a `company.name` y ponemos `Y` en Ascending. 
+
+<img width="622" height="292" alt="image" src="https://github.com/user-attachments/assets/23b79581-b584-49ce-bd83-9d4ca54fa0e4" />
+
+**Resultados:**
+
+Para finalizar con el proceso, los datos analizados se mandaron a un componente llamado **Json out**, donde agregamos que la información nos 
+aparezca en un bloque llamado data donde agregaremos 10 usuarios. 
+
+<img width="536" height="200" alt="image" src="https://github.com/user-attachments/assets/a7e4a6bb-bac7-483f-b5ab-b01ed3eb17f4" />
+
+además en la pestaña de fields, debemos de seleccionar todas las columnas del json que queremos, en este caso se selecciono todas las columnas que ya se procesaron, como se observa se ha eliminado la columna de geo y el resultado mostrata los usuarios ordenados alfabeticamente por el nombre de la compania. 
+
+<img width="265" height="110" alt="image" src="https://github.com/user-attachments/assets/d44b1adb-8914-4588-9bd2-a5a348bc0db7" />
+
+Ahora podemos observar como se ordenó los usuarios por orden alfabético mediante el nombre de la compania. 
+
+Esto es importante cuando debemos de presnetar datos ordenados en orden alfabético y más a futuro podemos agrupar por companias, ver cuantos usuarios hay por cada una, etc. 
+
+<img width="1481" height="342" alt="image" src="https://github.com/user-attachments/assets/6eeedb2f-5bc8-4d20-950a-74117af21fe5" />
+
 
 ---
 
