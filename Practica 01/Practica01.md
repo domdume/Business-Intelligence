@@ -164,7 +164,54 @@ El resultado del archivo procesado en comparación con el original permite obser
 
 ## Ejemplo 5
 
-Descripción:
+Descripción: Text File Input y transformación Replace in String
 
-Resultados :
+Se agregó el componente Text File Input en el área de trabajo para iniciar la transformación, el cual permite leer datos desde un archivo CSV.
+
+<img width="813" height="469" alt="image" src="https://github.com/user-attachments/assets/36a868d5-a39b-4146-a716-6ce039b5bdca" />
+
+Se configuró el archivo de entrada seleccionando el archivo CSV que contiene los datos de estudiantes.
+
+<img width="1655" height="365" alt="image" src="https://github.com/user-attachments/assets/6443733e-18b4-458d-9491-711078c33b4c" />
+
+Se definieron los parámetros del archivo como tipo CSV, separador, encabezado y codificación para asegurar una correcta lectura de los datos.
+
+<img width="1658" height="754" alt="image" src="https://github.com/user-attachments/assets/35f4a00a-5c0d-4110-a903-10fea6de44ab" />
+
+Se definieron los campos del archivo, incluyendo nombres, tipos de datos y longitudes, y se realizó una vista previa de los datos.
+
+<img width="1658" height="858" alt="image" src="https://github.com/user-attachments/assets/7788237a-4ef3-4132-9787-b9b972f625ce" />
+
+Se agregó el componente String operations para realizar transformaciones sobre los campos de texto.
+
+<img width="520" height="293" alt="image" src="https://github.com/user-attachments/assets/948965ea-0c14-4f22-a014-64ca76139c8d" />
+
+Se configuraron los campos de texto para aplicar operaciones como conversión a mayúsculas y eliminación de espacios.
+
+<img width="758" height="293" alt="image" src="https://github.com/user-attachments/assets/d1271a1e-c44c-4819-9430-82d9d1429704" />
+
+Se añadió el componente XML Output al flujo para exportar los datos transformados en formato XML.
+
+<img width="533" height="139" alt="image" src="https://github.com/user-attachments/assets/bd389112-047e-4251-8faa-bdb96c960f20" />
+
+Se configuró la ruta y nombre del archivo de salida en formato XML.
+
+<img width="778" height="410" alt="image" src="https://github.com/user-attachments/assets/606a53d9-e891-45fc-b7c5-989d3a4d20a5" />
+
+Se definieron los elementos XML principales, como el elemento raíz y los elementos por registro.
+
+<img width="664" height="343" alt="image" src="https://github.com/user-attachments/assets/57fb3258-e0cc-4c9a-8374-6086a52c7178" />
+
+
+Resultados:
+
+Se ejecutó la transformación completa en Pentaho.
+
+<img width="946" height="457" alt="image" src="https://github.com/user-attachments/assets/a1914c9a-7a71-400f-af18-00aac86c0605" />
+
+Se visualizó el archivo XML generado con los datos procesados.
+
+<img width="470" height="741" alt="image" src="https://github.com/user-attachments/assets/8db7eda8-31de-49a5-9d7c-51dc7a24a975" />
+
+
 
