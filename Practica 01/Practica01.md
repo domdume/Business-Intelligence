@@ -75,44 +75,44 @@ Resultados:
 #### 1. Entrada de Datos (CSV file input)
 Se configuró la extracción de los datos del archivo. Se definió la coma (`,`) como delimitador y se utilizaron comillas dobles (`"`) como calificador de texto (Enclosure) para evitar conflictos con los paréntesis y comas de la columna RGB.
 
-<img width="100%" src="https://github.com/user-attachments/assets/e1167563-442b-4f8a-8364-1006adff22b9" alt="Configuracion Input 1" />
+<img width="1337" height="721" alt="Configuracion Input 1" src="https://github.com/user-attachments/assets/f0eeb8ab-9a69-4bff-8756-df7c61cef1f9" />
 
 Se utilizó el botón **Get Fields** para mapear automáticamente las columnas `Name`, `HEX` y `RGB`.
 
-<img width="100%" src="https://github.com/user-attachments/assets/68681770-17dd-4528-9f06-5d5a9ae7f822" alt="Configuracion Input 2" />
+<img width="850" height="564" alt="Configuracion Input 2" src="https://github.com/user-attachments/assets/bee18a52-1d0b-40f6-a023-5a5d4869e401" />
 
 #### 2. Transformación (String operations)
 Se añadió el componente **String operations**. Se configuró específicamente el campo `Name` para que todos los registros se conviertan a **Upper case** y se aplicó un **Trim type: both** para eliminar cualquier espacio en blanco accidental al inicio o final de las cadenas.
 
-<img width="100%" src="https://github.com/user-attachments/assets/f6fbf5a9-17f8-4e2b-a343-e4ea121781b2" alt="Transformacion" />
+<img width="1318" height="280" alt="Transformacion" src="https://github.com/user-attachments/assets/45882d04-c56d-495d-9b9f-ed9457d2b1fb" />
 
 #### 3. Previsualización de Datos (Preview)
 Antes de procesar la carga final, se ejecutó una vista previa mediante el botón **Preview rows** en el nodo de transformación. Esto permitió validar que los nombres de los colores cambiaron exitosamente a mayúsculas (ej. "White" a "WHITE") sin alterar los códigos hexadecimales.
 
-<img width="100%" src="https://github.com/user-attachments/assets/a9ea2033-babb-49b0-b4e1-bcddcb11c9a1" alt="Preview datos" />
+<img width="978" height="593" alt="Preview datos" src="https://github.com/user-attachments/assets/2e719e4a-2feb-4ace-af6f-8ee806471cae" />
 
 #### 4. Salida de Datos (Text file output)
 Se conectó el flujo a un componente de salida para generar el archivo final procesado. Se definió el nombre del archivo de salida y la ubicación haciendo clic en **Browse**.
 
-<img width="100%" src="https://github.com/user-attachments/assets/e66c97f2-fbc4-48e8-b4cc-7c426ff4d29c" alt="Configuracion Output 1" />
+<img width="1091" height="574" alt="Configuracion Output 1" src="https://github.com/user-attachments/assets/a6f5d5e9-363f-481f-9c52-8d1ba69db36a" />
 
 En la pestaña **Content** se aseguró que la codificación fuera **UTF-8** en Encoding.
 
-<img width="100%" src="https://github.com/user-attachments/assets/cf2388dc-0a08-4afd-884d-fdfb338fe543" alt="Configuracion Output 2" />
+<img width="1093" height="572" alt="Configuracion Output 2" src="https://github.com/user-attachments/assets/0ead4098-3b96-442e-ad8a-9345d9320e94" />
 
 En la pestaña **Fields** se hizo clic en **Get Fields** para confirmar las columnas de salida.
 
-<img width="100%" src="https://github.com/user-attachments/assets/4728a9fc-8d47-464c-8dbe-a63172d7311a" alt="Configuracion Output 3" />
+<img width="1079" height="563" alt="Configuracion Output 3" src="https://github.com/user-attachments/assets/3a9fcc2d-b617-4487-8296-bf330374a4fa" />
 
 ### Resultados:
 
 El proceso finalizó exitosamente, mostrando los indicadores visuales (checks verdes) en todos los pasos del flujo de trabajo dentro de Spoon.
 
-<img width="100%" src="https://github.com/user-attachments/assets/fca29cd2-2250-4922-814d-7b3d07f3f618" alt="Resultado 1" />
+<img width="769" height="801" alt="Resultado 1" src="https://github.com/user-attachments/assets/8b868a1e-9837-4e41-89f7-d1bc8b870a0e" />
 
 El resultado del archivo procesado en comparación con el original permite observar la correcta transformación de los datos a mayúsculas:
 
-<img width="100%" src="https://github.com/user-attachments/assets/7380ac9d-5874-4ce1-9344-30d2dc84b38b" alt="Resultado 2" />
+<img width="734" height="794" alt="Resultado2" src="https://github.com/user-attachments/assets/bd2ea58a-51f8-42c2-819b-d7efda2114c1" />
 
 ---
 
