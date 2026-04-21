@@ -108,8 +108,75 @@ Esto es importante cuando debemos de presnetar datos ordenados en orden alfabét
 ## Ejemplo 3
 
 Descripción:
+<br>
+
+Input: Table input
+<br>
+<img width="153" height="112" alt="image" src="https://github.com/user-attachments/assets/42012477-3def-466b-90f3-59efca801638" />
+<br>
+
+Transformación: Unique rows
+<br>
+<img width="121" height="105" alt="image" src="https://github.com/user-attachments/assets/5ca351bb-e4f9-4f14-bc7e-97395996fb12" />
+
+
+<br>
+
+El componente Table Input permite extraer datos desde una tabla de una base de datos, independientemente de su tipo, para procesar los datos en Pentaho. Para utilizarlo, primero es necesario establecer una conexión con la base de datos lo cual se realiza presionando el botón "New".
+<br>
+<img width="703" height="142" alt="image" src="https://github.com/user-attachments/assets/72e68b58-eb52-491d-95ee-c688a934324e" />
+<br>
+
+A continuación, se debe completar el formulario con los datos requeridos para la conexión, tales como el tipo de base de datos, servidor, nombre de la base, usuario y contraseña.
+<br>
+<img width="1360" height="510" alt="image" src="https://github.com/user-attachments/assets/4c545c87-526b-4e6a-8216-5daa872eeea8" />
+
+
+Una vez ingresados los datos verificamos la conexión mediante la opción de prueba.
+<br>
+<img width="336" height="212" alt="image" src="https://github.com/user-attachments/assets/45ce8215-de78-42dd-bfb5-57452c3f3d86" />
+
+
+Despues, se escribe la consulta SQL correspondiente y se puede visualizar una vista previa de los datos obtenidos.
+<br>
+
+<img width="459" height="389" alt="image" src="https://github.com/user-attachments/assets/67b9927f-21a2-4b7a-9928-171700c2de42" />
+
+Después, se procede a aplicar la transformación:
+<br>
+<img width="137" height="93" alt="image" src="https://github.com/user-attachments/assets/439ad542-dd3e-4d77-8766-41b9ed879060" />
+
+<br>
+
+La transformación Unique Rows se encarga de eliminar las filas duplicadas. Para ello, es necesario especificar las columnas que se utilizarán para encontrar duplicados.
+<br>
+<img width="505" height="316" alt="image" src="https://github.com/user-attachments/assets/99108a1a-0d90-439e-9c7e-3c33c9fb5fca" />
+<br>
+
+Es importante asegurarse de que los datos estén previamente ordenados, ya que esta transformación lo requiere para funcionar. Para ello, se puede utilizar otra transformacioón, en este caso Sort Rows.
+<br>
+<img width="101" height="96" alt="image" src="https://github.com/user-attachments/assets/c5e8f706-14e3-4275-bbea-630bdc6e37f0" />
+
+<br>
+
+Finalmente, se debe añadir un componente de salida para almacenar o visualizar los datos resultantes.
+<br>
+<img width="125" height="97" alt="image" src="https://github.com/user-attachments/assets/83850262-adcc-483e-ad08-67ecae4b462e" />
+
+<br>
 
 Resultados:
+
+Después de ejecutar la transformación en Pentaho, se obtiene el siguiente resultado:
+<br>
+<img width="556" height="95" alt="image" src="https://github.com/user-attachments/assets/1a6a9126-24ef-4984-b46c-72ac824dc116" />
+
+<br>
+<img width="450" height="229" alt="image" src="https://github.com/user-attachments/assets/1206855a-cb3e-4470-80fd-19b29ab5a9b0" />
+
+<br>
+
+Como se puede observar, las filas duplicadas han sido eliminadas correctamente.
 
 ---
 
