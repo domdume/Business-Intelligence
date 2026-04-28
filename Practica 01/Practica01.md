@@ -211,7 +211,7 @@ Se ejecutó la transformación completa en Pentaho.
 
 Se visualizó el archivo XML generado con los datos procesados.
 
-<img width="470" height="741" alt="image" src="https://github.com/user-attachments/assets/8db7eda8-31de-49a5-9d7c-51dc7a24a975" />
+<img width="370" height="441" alt="image" src="https://github.com/user-attachments/assets/8db7eda8-31de-49a5-9d7c-51dc7a24a975" />
 
 
 
