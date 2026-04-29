@@ -4,7 +4,7 @@
 
 ## Práctica 2
 
-**Integrantes:** Doménica J. Cárdenas, Salma Morales, Danna Morales, Gabriel Del Valle, Belén Cholango
+**Integrantes:** Doménica J. Cárdenas, Salma Morales, Danna Morales, Gabriel Del Valle, Belén Cholango.
 
 ---
 
@@ -39,7 +39,13 @@ Durante esta etapa se realizarón varias transformaciones con el objetivo de lim
 
 <img width="543" height="305" alt="image" src="https://github.com/user-attachments/assets/2f3530d5-4bc2-4124-adad-6c780eefff58" />
 
+3. Lo siguiente fue emplear el componente Value Mapper para normalizar los valores del campo categoría, unificando diferentes representaciones como “Htas”, “herram.” o “HERRAMIENTAS” en una única categoría estandarizada como “Herramientas”. Este proceso se replica para otras categorías como “Pinturas”, “Ferretería”, “Electricidad”, entre otras.
 
+<img width="556" height="624" alt="Image" src="https://github.com/user-attachments/assets/d3991b23-cdbb-4cc0-9295-9388c41a074b" />
+
+4. Finalmente, hay que utilizar otro Value Mapper para estandarizar el campo unidad_medida, unificando formatos como “1 unidad”, “1u” y “1 und” en un solo valor consistente. Del mismo modo se realiza la normalización de las unidades para litros, metros y cajas.
+
+<img width="560" height="479" alt="Image" src="https://github.com/user-attachments/assets/d98156d8-dd0d-4583-b5d6-40b4f7b3baaa" />
 
 
 
