@@ -47,6 +47,20 @@ Durante esta etapa se realizarón varias transformaciones con el objetivo de lim
 
 <img width="560" height="479" alt="Image" src="https://github.com/user-attachments/assets/d98156d8-dd0d-4583-b5d6-40b4f7b3baaa" />
 
+#### Salida de Datos 
+Para la salida de datos, se utilizó el componente Table Output de Pentaho para almacenar los datos ya transformados, creando una nueva tabla llamada staging.productos_ferreteria_clean. 
+<img width="641" height="536" alt="image" src="https://github.com/user-attachments/assets/a4423852-3f9b-4f9e-8e28-fe63f0342527" />
+<img width="660" height="515" alt="image" src="https://github.com/user-attachments/assets/2c6d3f1c-c8ee-4755-9df5-98c221158336" />
+
+Una vez se ha creado la tabla, procedemos a ejecutar el proceso de transformación y verificando en pgAdmin que se selecciones y se hayan cambiado los datos que configuramos con anterioridad.
+
+<img width="800" height="403" alt="image" src="https://github.com/user-attachments/assets/4d160cd0-891a-4093-89d2-d64d8cae4674" />
+<img width="737" height="503" alt="image" src="https://github.com/user-attachments/assets/ca525af7-e6f8-4b72-b5ee-3ec15de3c50e" />
+
+
+
+
+
 
 
 
