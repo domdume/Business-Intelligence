@@ -83,7 +83,7 @@ Luego se agregaron los datos al modelo.
 
 <img width="482" height="205" alt="image" src="https://github.com/user-attachments/assets/8e79d570-6b8d-4bf2-8961-ed57e8686586" />
 
-Finalmente, se crearon las relaciones de las tablas y se visualiz[o el diagrama. 
+Finalmente, se crearon las relaciones de las tablas y se visualizo el diagrama. 
 
 <img width="546" height="546" alt="image" src="https://github.com/user-attachments/assets/b9a25ca1-cbc6-4748-af5b-e76dc591f842" />
 
