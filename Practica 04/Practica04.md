@@ -246,8 +246,25 @@ ORDER BY p.Category, mes;
 
 <img width="477" height="857" alt="Image" src="https://github.com/user-attachments/assets/30b4a9c5-c7b3-4ce1-9278-6c3be5659219" />
 
-2. ¿Cuál es el ingreso total (ventas) por cliente y género?
-3. ¿Cuál es la cantidad total vendida por producto?
-4. ¿Cuál fue la cantidad enviada por mes de envío?
-5. ¿Cuánto se vendió por tamaño de producto y por estado civil del cliente?
+2. ¿Cuál es el ingreso total (ventas) por cliente y género?<br>
+    Para responder a esta pregunta se ejecutó la siguiente consulta SQL:
+ ```
+SELECT
+    f.CustomerKey,
+    c.Gender,
+    SUM(f.SalesAmount) AS ingreso_total
+FROM fact_ventas f
+JOIN dim_cliente c ON f.CustomerKey = c.CustomerKey
+GROUP BY f.CustomerKey, c.Gender
+ORDER BY ingreso_total DESC;
+   ```
+<br>
+En esta consulta se utilizan dos tablas: la tabla de hechos fact_ventas , que contiene las métricas de ventas como SalesAmount, y la tabla de dimensión dim_cliente, que proporciona información descriptiva del cliente, como el género. Ambas tablas se relacionan mediante el campo CustomerKey, el cual actúa como clave primaria en la dimensión y clave foránea en la tabla de hechos.<br><br>
+Como resultado obtenemos:<br><br>
+   <img width="542" height="455" alt="image" src="https://github.com/user-attachments/assets/ed5693a9-9e2c-4436-8fd8-6849320c4073" /><br>
+<br>
+  A partir de los resultados obtenidos, se observa que el ingreso de ventas totales por cliente es independiente de su género. Es decir, no existe una relación directa que determine que un género genere consistentemente mayores ingresos que otro.
+4. ¿Cuál es la cantidad total vendida por producto?
+5. ¿Cuál fue la cantidad enviada por mes de envío?
+6. ¿Cuánto se vendió por tamaño de producto y por estado civil del cliente?
 
