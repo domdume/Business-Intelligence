@@ -172,7 +172,7 @@ SELECT DISTINCT
 FROM ventas;
 ```
 
-2. Insertar en **dim_fecha_envio**
+- Insertar en **dim_fecha_envio**
 
 ```
 INSERT INTO dim_fecha_envio
@@ -182,7 +182,7 @@ SELECT DISTINCT
 FROM ventas;
 ```
 
-Una vez completada las tablas de dimensiones, se procedio a crear la tabla principal que es la de fact_ventas que integra todas las relaciones:
+6. Una vez completada las tablas de dimensiones, se procedio a crear la tabla principal que es la de fact_ventas que integra todas las relaciones:
 
 ```
 CREATE TABLE fact_ventas (
@@ -218,7 +218,7 @@ SELECT
 FROM ventas;
 ```
 
-Finalmente, se comprobó que todos los datos se hayan cargado correctamente en la tabla de hechos mediante la consulta:
+7. Finalmente, se comprobó que todos los datos se hayan cargado correctamente en la tabla de hechos mediante la consulta:
 
 ```
 SELECT * FROM fact_ventas;
