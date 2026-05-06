@@ -8,15 +8,15 @@
 
 ## Trabajo en grupo
 
+El proceso de esta práctica se llevó a cabo en **PostgreSQL** mediante **pgAdmin**, partiendo de dos archivos fuente: `products.csv` y `Tabla_Desnormalizada_Ventas.csv`. Además, se realizó los diagramas de estrella de ambos archivos normalizados en Power Pivot.
+
 ### Diagrama Modelo Estrella de **products.csv**
 
 <img width="600" height="454" alt="image" src="https://github.com/user-attachments/assets/ffbb31c9-4798-4680-b427-6bf11e202cff" />
 
 ------------
 
-### Normalizar en un esquema estrella los datos del archivo "Tabla_Desnormalizada_Ventas.csv"
-
-##### Diagrama Modelo Estrella de **Tabla_Desnormalizada_Ventas.csv**
+#### Diagrama Modelo Estrella de **Tabla_Desnormalizada_Ventas.csv**
 
 <img width="762" height="478" alt="image" src="https://github.com/user-attachments/assets/e5be750b-b32c-444c-888d-068b54c8617f" />
 
@@ -25,9 +25,10 @@
 
 ##### Procedimiento resolución SQL 
 
-1. En primer lugar, se accedió a pgAdmin y una vez dentro del esquema public, se seleccionó la herramienta de `Query Tool`, la cual permitio ejecutar las consultas Sql.
+1. Se accedió a **pgAdmin** y, dentro del esquema `public`, se seleccionó la herramienta **Query Tool** para ejecutar las consultas SQL
    
-2. Una vez dentro del entorno, se procedió a crear la tabla `ventas`, la cual contiene toda la información inicial para el análisis.
+2. Una vez dentro del entorno, se creó la tabla `ventas`, la cual contiene toda la información inicial para el análisis.
+
 
 ```
 
@@ -80,9 +81,7 @@ Se comprobó que los datos se hayan cargado correctamente ejecutando una consult
 
 <img width="1489" height="609" alt="image" src="https://github.com/user-attachments/assets/0d6e1ccf-f225-4627-8553-1f348f6b3dd7" />
 
-5. **Creacion de las tablas de dimensión**
-
-Se creó la tabla dim_producto, que almacena la información relacionada con los productos. 
+5. Lo siguiente fue la creacion de las tablas de dimensión. Se creó la tabla dim_producto, que almacena la información relacionada con los productos. 
 
 ```
 CREATE TABLE dim_producto (
@@ -230,6 +229,23 @@ SELECT * FROM fact_ventas;
 ##### Contestar las siguientes preguntas en SQL:
 
 1. ¿Cuántas ventas se realizaron por categoría de producto y mes?
+
+Se realizó un cruce entre la tabla de hechos `fact_ventas`, la dimensión de productos `dim_producto` y la dimensión de fechas de orden `dim_fecha_orden`. Mediante un `GROUP BY` sobre la categoría y el mes extraído de la fecha de orden, se obtuvo el conteo total de transacciones para cada combinación:
+
+```sql
+SELECT
+    p.Category,
+    EXTRACT(MONTH FROM fo.OrderDate) AS mes,
+    COUNT(*) AS total_ventas
+FROM fact_ventas f
+JOIN dim_producto p       ON f.ProductKey   = p.ProductKey
+JOIN dim_fecha_orden fo   ON f.OrderDateKey = fo.OrderDateKey
+GROUP BY p.Category, EXTRACT(MONTH FROM fo.OrderDate)
+ORDER BY p.Category, mes;
+```
+
+<img width="477" height="857" alt="Image" src="https://github.com/user-attachments/assets/30b4a9c5-c7b3-4ce1-9278-6c3be5659219" />
+
 2. ¿Cuál es el ingreso total (ventas) por cliente y género?
 3. ¿Cuál es la cantidad total vendida por producto?
 4. ¿Cuál fue la cantidad enviada por mes de envío?
