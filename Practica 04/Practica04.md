@@ -10,19 +10,28 @@
 
 ### Diagrama Modelo Estrella de **products.csv**
 
+<img width="600" height="454" alt="image" src="https://github.com/user-attachments/assets/ffbb31c9-4798-4680-b427-6bf11e202cff" />
+
 ------------
 
 ### Normalizar en un esquema estrella los datos del archivo "Tabla_Desnormalizada_Ventas.csv"
 
 ##### Diagrama Modelo Estrella de **Tabla_Desnormalizada_Ventas.csv**
 
+<img width="762" height="478" alt="image" src="https://github.com/user-attachments/assets/e5be750b-b32c-444c-888d-068b54c8617f" />
+
+
 --------
 
 ##### Procedimiento resolución SQL 
 
-Lo primero que realizamos fue entrar al pgAdmin, y dentro de public ir a Query Tool. Una vez aquí, procedemos con la creación de la tabla "ventas".
+1. En primer lugar, se accedió a pgAdmin y una vez dentro del esquema public, se seleccionó la herramienta de `Query Tool`, la cual permitio ejecutar las consultas Sql.
+   
+2. Una vez dentro del entorno, se procedió a crear la tabla `ventas`, la cual contiene toda la información inicial para el análisis.
 
-**CREATE TABLE ventas (
+```
+
+  CREATE TABLE ventas (
     ProductKey INT,
     ProductCode VARCHAR(20),
     ProductName VARCHAR(100),
@@ -49,25 +58,34 @@ Lo primero que realizamos fue entrar al pgAdmin, y dentro de public ir a Query T
     UnitPrice NUMERIC(10,2),
     ProductCost NUMERIC(10,2),
     SalesAmount NUMERIC(10,2)
-);**
+);
+```
 
-Se verifica que esta tabla haya sido creada con el comando:
+3. Se verificó que la tabla se haya creado correctamente mediante la siguiente consulta:
 
-**SELECT * FROM ventas;** 
+ ```
+SELECT * FROM ventas;
+ ```
+<img width="1600" height="185" alt="image" src="https://github.com/user-attachments/assets/d2d8dc2e-6c43-460d-901a-0c3be529c3b0" />
 
-[primera imagen]
+4. A continuación, se realizó la importación de datos desde un archivo `.csv` hacia la tabla `ventas` utilizando las herramientas de pgAdmin.
 
-Ahora procedemos a realizar la importación de datos del archivo .csv en la tabla recien creada. 
+<img width="551" height="429" alt="image" src="https://github.com/user-attachments/assets/38f38545-687d-474e-babc-d95bb5a10fbe" />
 
-[siguiente imagenes]
 
-Se verifica que los datos hayan sido importados correctamente.
+<img width="551" height="429" alt="image" src="https://github.com/user-attachments/assets/45fe4a71-996f-4b75-b544-bea924261320" />
 
-[siguientes imagenes]
+-----------------------------------------------------------------------------------------------
+Se comprobó que los datos se hayan cargado correctamente ejecutando una consulta sobre la tabla. 
 
-Ahora procedemos a crear la tabla Dim_Producto ejecutando:
+<img width="1489" height="609" alt="image" src="https://github.com/user-attachments/assets/0d6e1ccf-f225-4627-8553-1f348f6b3dd7" />
 
-**CREATE TABLE dim_producto (
+5. **Creacion de las tablas de dimensión**
+
+Se creó la tabla dim_producto, que almacena la información relacionada con los productos. 
+
+```
+CREATE TABLE dim_producto (
     ProductKey INT PRIMARY KEY,
     ProductCode VARCHAR(20),
     ProductName VARCHAR(100),
@@ -76,11 +94,12 @@ Ahora procedemos a crear la tabla Dim_Producto ejecutando:
     Size VARCHAR(30),
     Category VARCHAR(50),
     Subcategory VARCHAR(50)
-);**
+);
+```
+Con la tabla creada, se insertaron los datos únicos desde la tabla ventas:
 
-y se llena con sus debidos datos
-
-**INSERT INTO dim_producto
+```
+INSERT INTO dim_producto
 SELECT DISTINCT
     ProductKey,
     ProductCode,
@@ -90,11 +109,13 @@ SELECT DISTINCT
     Size,
     Category,
     Subcategory
-FROM ventas;**
+FROM ventas;
+```
 
 Continuamos con la creación de la tabla Dim_Cliente:
 
-**CREATE TABLE dim_cliente (
+```
+CREATE TABLE dim_cliente (
     CustomerKey INT PRIMARY KEY,
     BirthDate DATE,
     MaritalStatus VARCHAR(30),
@@ -103,11 +124,12 @@ Continuamos con la creación de la tabla Dim_Cliente:
     Children INT,
     HomeOwner VARCHAR(10),
     Cars INT
-);**
+);
+```
+y se cargan con los datos que sean necesarios para el analisis
 
-y se llena con los datos que sean necesarios
-
-**INSERT INTO dim_cliente
+```
+INSERT INTO dim_cliente
 SELECT DISTINCT
     CustomerKey,
     BirthDate,
@@ -117,45 +139,53 @@ SELECT DISTINCT
     Children,
     HomeOwner,
     Cars
-FROM ventas;**
+FROM ventas;
+```
+A continuación se creó las dos dimensiones de fecha, primero
 
-Ahora vamos a crear las dos dimensiones de fecha, primero
-
-1. dim_fecha_orden
-
-**CREATE TABLE dim_fecha_orden (
+- **dim_fecha_orden**
+```
+CREATE TABLE dim_fecha_orden (
     OrderDateKey INT PRIMARY KEY,
     OrderDate DATE
-);**
+);
+```
 
-2. dim_fecha_envio
+- **dim_fecha_envio**
 
-**CREATE TABLE dim_fecha_envio (
+```
+CREATE TABLE dim_fecha_envio (
     ShipDateKey INT PRIMARY KEY,
     ShipDate DATE
-);**
+);
+```
 
-Y una vez cada tabla este creada se llena con sus debidos datos
+Despues de que cada tabla este creada, se procedió con la incersión de sus debidos datos
 
-1. Llenar dim_fecha_orden
+- Insertar en **dim_fecha_orden**
 
-**INSERT INTO dim_fecha_orden
+```
+INSERT INTO dim_fecha_orden
 SELECT DISTINCT
     OrderDateKey,
     OrderDate
-FROM ventas;**
+FROM ventas;
+```
 
-2. Llenar dim_fecha_envio
+2. Insertar en **dim_fecha_envio**
 
-**INSERT INTO dim_fecha_envio
+```
+INSERT INTO dim_fecha_envio
 SELECT DISTINCT
     ShipDateKey,
     ShipDate
-FROM ventas;**
+FROM ventas;
+```
 
-Una vez completada la creación de las tablas de dimensiones, procederemos a crear la tabla principal que es la de fact_ventas
+Una vez completada las tablas de dimensiones, se procedio a crear la tabla principal que es la de fact_ventas que integra todas las relaciones:
 
-**CREATE TABLE fact_ventas (
+```
+CREATE TABLE fact_ventas (
     OrderNumber VARCHAR(20),
     OrderLineNumber INT,
     ProductKey INT REFERENCES dim_producto(ProductKey),
@@ -167,11 +197,13 @@ Una vez completada la creación de las tablas de dimensiones, procederemos a cre
     ProductCost NUMERIC(10,2),
     SalesAmount NUMERIC(10,2),
     PRIMARY KEY (OrderNumber, OrderLineNumber)
-);**
+);
+```
 
-una vez creada, se insertan datos
+Una vez creada dicha tabla, se insertan datos: 
 
-**INSERT INTO fact_ventas
+```
+INSERT INTO fact_ventas
 SELECT
     OrderNumber,
     OrderLineNumber,
@@ -183,11 +215,16 @@ SELECT
     UnitPrice,
     ProductCost,
     SalesAmount
-FROM ventas;**
+FROM ventas;
+```
 
-Finalmente comprobamos que esten todos los datos dentro de la tabla principal con **SELECT * FROM fact_ventas**.
+Finalmente, se comprobó que todos los datos se hayan cargado correctamente en la tabla de hechos mediante la consulta:
 
-[siguientes imagenes]
+```
+SELECT * FROM fact_ventas;
+```
+
+<img width="1486" height="579" alt="image" src="https://github.com/user-attachments/assets/055ae9ab-6cdd-4d28-b8c4-7aaf722b5416" />
 
 --------
 ##### Contestar las siguientes preguntas en SQL:
