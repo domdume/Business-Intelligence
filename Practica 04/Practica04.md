@@ -264,7 +264,55 @@ Como resultado obtenemos:<br><br>
    <img width="542" height="455" alt="image" src="https://github.com/user-attachments/assets/ed5693a9-9e2c-4436-8fd8-6849320c4073" /><br>
 <br>
   A partir de los resultados obtenidos, se observa que el ingreso de ventas totales por cliente es independiente de su género. Es decir, no existe una relación directa que determine que un género genere consistentemente mayores ingresos que otro.
-4. ¿Cuál es la cantidad total vendida por producto?
-5. ¿Cuál fue la cantidad enviada por mes de envío?
-6. ¿Cuánto se vendió por tamaño de producto y por estado civil del cliente?
 
+3. ¿Cuál es la cantidad total vendida por producto?
+
+A partir de la consulta SQL:
+```
+SELECT
+    p.ProductName,
+    SUM(f.Quantity) AS cantidad_total_vendida
+FROM fact_ventas f
+JOIN dim_producto p ON f.ProductKey = p.ProductKey
+GROUP BY p.ProductName
+ORDER BY cantidad_total_vendida DESC;
+```
+<img width="476" height="424" alt="3" src="https://github.com/user-attachments/assets/f95ac0a4-9c4a-4d48-8a80-f3ecc6f0a19b" />
+
+Se puede interpretar que el producto 19 destaca significativamente sobre el resto, siendo el único en alcanzar la marca de las 60 unidades. Existe un empate en la sexta posición entre el producto 44 y el producto 14, ambos con 26 unidades vendidas.
+
+4. ¿Cuál fue la cantidad enviada por mes de envío?
+
+Utilizando la consulta SQL:
+  ```
+SELECT
+    EXTRACT(MONTH FROM fe.ShipDate) AS mes_envio,
+    SUM(f.Quantity) AS cantidad_enviada
+FROM fact_ventas f
+JOIN dim_fecha_envio fe ON f.ShipDateKey = fe.ShipDateKey
+GROUP BY EXTRACT(MONTH FROM fe.ShipDate)
+ORDER BY mes_envio;
+ ```  
+<img width="433" height="517" alt="4" src="https://github.com/user-attachments/assets/ce82dcdb-91bb-46e1-ab4c-70bacf80dfe5" />
+
+Se observa una fluctuación considerable a lo largo del año. Hay un crecimiento constante desde febrero hasta alcanzar el pico en junio, seguido de una caída abrupta en el tercer trimestre (julio-septiembre) y una recuperación notable hacia el cierre del año en diciembre.El mes con mayor volumen de envíos fue junio, alcanzando un total de 47 unidades.
+
+5. ¿Cuánto se vendió por tamaño de producto y por estado civil del cliente?
+
+Se utilizó la consulta:
+
+  ```
+SELECT
+    p.Size,
+    c.MaritalStatus,
+    SUM(f.SalesAmount) AS total_vendido
+FROM fact_ventas f
+JOIN dim_producto p ON f.ProductKey = p.ProductKey
+JOIN dim_cliente c ON f.CustomerKey = c.CustomerKey
+GROUP BY p.Size, c.MaritalStatus
+ORDER BY total_vendido DESC;
+ ```
+
+<img width="583" height="335" alt="5" src="https://github.com/user-attachments/assets/ca9cc1a7-c942-435c-8e5a-a4502a638b5a" />
+
+Se observa que en todas las categorías de tamaño, el grupo de clientes casaos presenta un volumen de compra significativamente mayor en comparación con el grupo solteros.
