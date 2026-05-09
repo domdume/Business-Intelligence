@@ -9,8 +9,9 @@
 ## Caso de estudio
 
 Una empresa desea analizar el rendimiento de sus ventas según productos, clientes y fechas. Se necesita crear un esquema estrella identificando:
-•	Tabla de hechos
-•	Dimensiones
+
+•	Tabla de hechos.
+•	Dimensiones.
 
 El objetivo es responder a preguntas comerciales clave mediante tablas dinámicas basadas en Power Pivot
 1. ¿Cuántas ventas se realizaron por categoría de producto y mes?
@@ -58,7 +59,7 @@ Primero, se identificaron las tablas de hechos y de dimensiones, las cuales qued
 
 **dim_date**
 - `DateKey (PK)`
-- `Year`
+- `Day`
 - `Month`
 - `Year`
 
@@ -88,9 +89,48 @@ Finalmente, se crearon las relaciones de las tablas y se visualizo el diagrama.
 <img width="546" height="546" alt="image" src="https://github.com/user-attachments/assets/b9a25ca1-cbc6-4748-af5b-e76dc591f842" />
 
 
+### Preguntas
 
+1. ¿Cuántas ventas se realizaron por categoría de producto y mes?
 
+Se utilizaron las tablas `fact_sales`, `dim_product` y `dim_date`, como también las relaciones definidas en el modelo estrella:
 
+- `fact_sales[ProductKey]` → `dim_product[ProductKey]`
+- `fact_sales[OrderDateKey]` → `dim_date[DateKey]`
+
+En la tabla dinámica de Power Pivot se configuró:
+
+| Campo       | Valor                          |
+|-------------|--------------------------------|
+| **Filas**   | `dim_product[Category]`        |
+| **Columnas**| `dim_date[Month]`              |
+| **Valores** | `COUNT(fact_sales[OrderNumber])` |
+
+De este modo se puede identificar fácilmente las tendencias y picos de demanda por categoría.
+
+<img width="911" height="127" alt="Image" src="https://github.com/user-attachments/assets/9fc90a3b-c9be-4404-b986-6816ca2a8181" />
+
+2.	¿Cuál es el ingreso total (ventas) por cliente y género?
+
+Se utilizaron las tablas `fact_sales` y `dim_customer`, como también la relación definida en el modelo estrella:
+
+- `fact_sales[CustomerKey]` → `dim_customer[CustomerKey]`
+
+En la tabla dinámica de Power Pivot se configuró:
+
+| Campo       | Valor                        |
+|-------------|------------------------------|
+| **Filas**   | `dim_customer[CustomerKey]`  |
+| **Columnas**| `dim_customer[Gender]`       |
+| **Valores** | `SUM(fact_sales[SalesAmount])` |
+
+Esto facilita el análisis del comportamiento de compra según esta variable demográfica.
+
+<img width="415" height="313" alt="Image" src="https://github.com/user-attachments/assets/15c99afe-4c21-4f1b-8e5e-6f9e792dd5e7" />
+
+3.	¿Cuál es la cantidad total vendida por producto?
+4.	¿Cuál fue la cantidad enviada por mes de envío?
+5.	¿Cuánto se vendió por tamaño de producto y por estado civil del cliente?
 
 
 
