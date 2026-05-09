@@ -128,9 +128,19 @@ Esto facilita el análisis del comportamiento de compra según esta variable dem
 
 <img width="415" height="313" alt="Image" src="https://github.com/user-attachments/assets/15c99afe-4c21-4f1b-8e5e-6f9e792dd5e7" />
 
-3.	¿Cuál es la cantidad total vendida por producto?
-4.	¿Cuál fue la cantidad enviada por mes de envío?
-5.	¿Cuánto se vendió por tamaño de producto y por estado civil del cliente?
+3.	¿Cuál es la cantidad total vendida por producto? <br>
+Se utilizaron las tablas `fact_sales` y `dim_product`, que cuenta con la relación definida en el modelo estrella:
+Se inserto la tabal dinamica con el `nombre del producto` de la tabla dim_product y `la suma del monto de ventas` de la tabla fact_sales:
+
+
+<img width="283" height="265" alt="image" src="https://github.com/user-attachments/assets/f560f3fc-5ff2-4bd1-a528-5c8ee3084f04" />
+
+
+<br>
+Gracias a esta tabla, se puede analizar la cantidad total vendida por cada producto, lo cual facilita el analizar que productos se venden más o menos. 
+
+5.	¿Cuál fue la cantidad enviada por mes de envío?
+6.	¿Cuánto se vendió por tamaño de producto y por estado civil del cliente?
 
 
 
