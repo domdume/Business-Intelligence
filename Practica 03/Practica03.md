@@ -138,11 +138,19 @@ Se inserto la tabal dinamica con el `nombre del producto` de la tabla dim_produc
 
 <br>
 Gracias a esta tabla, se puede analizar la cantidad total vendida por cada producto, lo cual facilita el analizar que productos se venden más o menos. 
-
+<br>
 4.	¿Cuál fue la cantidad enviada por mes de envío?
+Se utilizaron las tablas `fact_sales` y `dim_date`, que cuenta con la relación donde muestra las fechas de envio, de donde posteriormente se obtienen los meses.
+Se inserto la tabal dinamica con el `mes` de la tabla dim_date y `la cantidad` de la tabla fact_sales:
+
+<img width="269" height="337" alt="image" src="https://github.com/user-attachments/assets/df618c07-b9d0-44f3-b15a-ab4e59114f6e" />
+
+<br>
+Gracias a esta tabla, se puede observar que el mes con mas envíos es Junio. <br>  
+ 
 5.	¿Cuánto se vendió por tamaño de producto y por estado civil del cliente?
 Se utilizaron las tablas `fact_sales` y `dim_customer` para poder insertar en la tabla dinámica los datos de categoría de tamaño de producto, el estado civil del cliente y agruparlos. 
-<img width="195" height="152" alt="image" src="https://github.com/user-attachments/assets/a25d5308-970e-4c86-9e2e-933e74f540af" />
+<img width="250" height="200" alt="image" src="https://github.com/user-attachments/assets/a25d5308-970e-4c86-9e2e-933e74f540af" />
 Se observa que en todas las categorías de tamaño, el grupo de clientes casados presenta un volumen de compra significativamente mayor en comparación con el grupo solteros.
 
 
