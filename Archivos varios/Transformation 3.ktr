@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Load fact sales</name>
+    <name>Transformation 3</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,16 +427,16 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2026/05/08 08:26:40.018</created_date>
+    <created_date>2026/05/08 08:17:55.303</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2026/05/08 08:26:40.018</modified_date>
+    <modified_date>2026/05/08 08:17:55.303</modified_date>
     <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>facts</name>
+    <name>raw</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -490,42 +489,17 @@
   <order>
     <hop>
       <from>Table input</from>
-      <to>Stream lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table input 2</from>
-      <to>Stream lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Customer</from>
-      <to>Stream lookup 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Date</from>
-      <to>Stream lookup 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Stream lookup</from>
-      <to>Stream lookup 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Stream lookup 2</from>
-      <to>Stream lookup 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Stream lookup 2 2</from>
       <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Select values</from>
-      <to>Table output</to>
+      <to>Unique rows</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Unique rows</from>
+      <to>Insertar en dim customer</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -540,10 +514,9 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>facts</connection>
-    <sql>SELECT product_id, customer_id, order_date, quantity, unit_price, sales_amount
-FROM raw_sales;
-
+    <connection>raw</connection>
+    <sql>       SELECT customer_id, customer_name, gender, marital_status, income
+    FROM raw_sales;
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -555,33 +528,10 @@ FROM raw_sales;
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>product_id</name>
-        <length>4</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>product_id</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_EC</date_format_locale>
-        <date_format_timezone>America/Guayaquil</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
         <name>customer_id</name>
         <length>5</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>raw_sales</origin>
         <comments>customer_id</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -599,13 +549,59 @@ FROM raw_sales;
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Date</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>order_date</name>
-        <length>-1</length>
+        <name>customer_name</name>
+        <length>21</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>order_date</comments>
+        <origin>raw_sales</origin>
+        <comments>customer_name</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_EC</date_format_locale>
+        <date_format_timezone>America/Guayaquil</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>gender</name>
+        <length>1</length>
+        <precision>-1</precision>
+        <origin>raw_sales</origin>
+        <comments>gender</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_EC</date_format_locale>
+        <date_format_timezone>America/Guayaquil</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>marital_status</name>
+        <length>7</length>
+        <precision>-1</precision>
+        <origin>raw_sales</origin>
+        <comments>marital_status</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -624,58 +620,12 @@ FROM raw_sales;
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>quantity</name>
+        <name>income</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>quantity</comments>
+        <origin>raw_sales</origin>
+        <comments>income</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_EC</date_format_locale>
-        <date_format_timezone>America/Guayaquil</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Number</type>
-        <storagetype>normal</storagetype>
-        <name>unit_price</name>
-        <length>8</length>
-        <precision>2</precision>
-        <origin>Table input</origin>
-        <comments>unit_price</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_EC</date_format_locale>
-        <date_format_timezone>America/Guayaquil</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Number</type>
-        <storagetype>normal</storagetype>
-        <name>sales_amount</name>
-        <length>9</length>
-        <precision>2</precision>
-        <origin>Table input</origin>
-        <comments>sales_amount</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -700,354 +650,8 @@ FROM raw_sales;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
+      <xloc>144</xloc>
       <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Stream lookup</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>Table input 2</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>product_id</name>
-        <field>product_id</field>
-      </key>
-      <value>
-        <name>product_key</name>
-        <rename>product_key</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table input 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>facts</connection>
-    <sql>SELECT product_id, product_key FROM dim_product;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>product_id</name>
-        <length>10</length>
-        <precision>-1</precision>
-        <origin>Table input 2</origin>
-        <comments>product_id</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_EC</date_format_locale>
-        <date_format_timezone>America/Guayaquil</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>product_key</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 2</origin>
-        <comments>product_key</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_EC</date_format_locale>
-        <date_format_timezone>America/Guayaquil</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Customer</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>facts</connection>
-    <sql>SELECT customer_id, customer_key FROM dim_customer;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>customer_id</name>
-        <length>10</length>
-        <precision>-1</precision>
-        <origin>Table input 3</origin>
-        <comments>customer_id</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_EC</date_format_locale>
-        <date_format_timezone>America/Guayaquil</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>customer_key</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input 3</origin>
-        <comments>customer_key</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_EC</date_format_locale>
-        <date_format_timezone>America/Guayaquil</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Stream lookup 2</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>Customer</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>customer_id</name>
-        <field>customer_id</field>
-      </key>
-      <value>
-        <name>customer_key</name>
-        <rename>customer_key</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Stream lookup 2 2</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>Date</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>order_date</name>
-        <field>date_key</field>
-      </key>
-      <value>
-        <name>date_key</name>
-        <rename>date_key</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Date</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>facts</connection>
-    <sql>SELECT date_key FROM dim_date;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Date</type>
-        <storagetype>normal</storagetype>
-        <name>date_key</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Date</origin>
-        <comments>date_key</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_EC</date_format_locale>
-        <date_format_timezone>America/Guayaquil</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1064,27 +668,23 @@ FROM raw_sales;
     </partitioning>
     <fields>
       <field>
-        <name>product_key</name>
+        <name>customer_id</name>
         <rename/>
       </field>
       <field>
-        <name>customer_key</name>
+        <name>customer_name</name>
         <rename/>
       </field>
       <field>
-        <name>date_key</name>
+        <name>gender</name>
         <rename/>
       </field>
       <field>
-        <name>quantity</name>
+        <name>marital_status</name>
         <rename/>
       </field>
       <field>
-        <name>unit_price</name>
-        <rename/>
-      </field>
-      <field>
-        <name>sales_amount</name>
+        <name>income</name>
         <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
@@ -1098,13 +698,48 @@ FROM raw_sales;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>472</xloc>
-      <yloc>352</yloc>
+      <xloc>336</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table output</name>
+    <name>Unique rows</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <count_rows>N</count_rows>
+    <count_field/>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
+    <fields>
+      <field>
+        <name>customer_id</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insertar en dim customer</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1114,9 +749,9 @@ FROM raw_sales;
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>facts</connection>
+    <connection>raw</connection>
     <schema/>
-    <table>fact_sales</table>
+    <table>dim_customer</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1133,28 +768,24 @@ FROM raw_sales;
     <return_field/>
     <fields>
       <field>
-        <column_name>product_key</column_name>
-        <stream_name>product_key</stream_name>
+        <column_name>customer_id</column_name>
+        <stream_name>customer_id</stream_name>
       </field>
       <field>
-        <column_name>customer_key</column_name>
-        <stream_name>customer_key</stream_name>
+        <column_name>customer_name</column_name>
+        <stream_name>customer_name</stream_name>
       </field>
       <field>
-        <column_name>date_key</column_name>
-        <stream_name>date_key</stream_name>
+        <column_name>gender</column_name>
+        <stream_name>gender</stream_name>
       </field>
       <field>
-        <column_name>quantity</column_name>
-        <stream_name>quantity</stream_name>
+        <column_name>marital_status</column_name>
+        <stream_name>marital_status</stream_name>
       </field>
       <field>
-        <column_name>unit_price</column_name>
-        <stream_name>unit_price</stream_name>
-      </field>
-      <field>
-        <column_name>sales_amount</column_name>
-        <stream_name>sales_amount</stream_name>
+        <column_name>income</column_name>
+        <stream_name>income</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1166,8 +797,8 @@ FROM raw_sales;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
-      <yloc>352</yloc>
+      <xloc>736</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
