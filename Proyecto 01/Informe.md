@@ -231,9 +231,9 @@ El **Dashboard General** presenta los KPIs corporativos de más alto nivel para 
 
 | KPI | Valor |
 |-----|-------|
-| Ventas Totales | **$191.15 millones** |
-| Ticket Promedio | **$5.26** |
-| Total Transacciones | **36 millones** |
+| Ventas Totales | **$361.70 millones** |
+| Ticket Promedio | **$5.92** |
+| Total Transacciones | **61 millones** |
 
 **Análisis temporal**: El gráfico temporal muestra una disminución aparente de las ventas entre 2013 y 2014. Sin embargo, este comportamiento se debe a que el dataset contiene información completa únicamente para el año 2013, mientras que para 2014 solo se dispone de registros correspondientes a los primeros meses del año. Por esta razón, los valores de 2014 no son directamente comparables con el total anual de 2013. Aun así, el dashboard permite identificar patrones de comportamiento temporal y realizar análisis estacionales mediante operaciones OLAP de drill-down por año, mes y día.
 
