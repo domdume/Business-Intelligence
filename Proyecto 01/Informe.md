@@ -83,9 +83,9 @@ La transformación `dim_tienda` carga la dimensión de tiendas desde la tabla de
 ### Pasos:
 1. **Leer stores staging**: Se conecta a la base de datos de staging y extrae todos los registros de la tabla de tiendas, incluyendo los campos `store_nbr`, `city`, `state`, `type` (tipo de tienda: A, B, C, D, E).
 
-2. **User defined Java expression** *(User Defined Java Expression)*: Se aplica lógica de derivación de campo. Concretamente, se genera el campo `Ciudad_Ecuador` a partir del campo `city`, realizando una normalización o mapeo de nombres de ciudades al estándar ecuatoriano para consistencia en los dashboards geográficos.
+2. **User defined Java expression** *(User Defined Java Expression)*: Se aplica lógica de derivación de campo. Concretamente, se genera el campo `region` a partir del campo `state`, realizando un mapeo que agrupa los estados de Ecuador en sus regiones geográficas correspondientes (Costa, Sierra, Amazonía, Insular) para enriquecer la dimensión con un nivel jerárquico adicional útil en el análisis.
 
-3. **Select values**: Se seleccionan y renombran únicamente los campos necesarios para la dimensión (`store_nbr`, `city`, `Ciudad_Ecuador`, `state`, `region`, `cluster`, `type`), eliminando cualquier campo innecesario proveniente del staging.
+3. **Select values**: Se seleccionan y renombran únicamente los campos necesarios para la dimensión (`store_nbr`, `city`, `state`, `region`, `cluster`, `type`), eliminando cualquier campo innecesario proveniente del staging.
 
 4. **Add sequence** : Se genera la **clave sustituta** `sk_tienda` como un entero autoincremental. Esta clave desvincula el DWH del identificador operacional (`store_nbr`) y es la que se usará como llave foránea en las tablas de hechos.
 
@@ -235,7 +235,7 @@ El **Dashboard General** presenta los KPIs corporativos de más alto nivel para 
 | Ticket Promedio | **$5.26** |
 | Total Transacciones | **36 millones** |
 
-**Análisis temporal**: Se observa una **tendencia descendente en ventas** entre 2013 y 2014, pasando de aproximadamente $140M a $50M en el gráfico de líneas. Este comportamiento puede estar asociado a factores macroeconómicos del Ecuador en ese período (variación del precio del petróleo, reformas tributarias) o a efectos estacionales específicos de los meses seleccionados.
+**Análisis temporal**: El gráfico temporal muestra una disminución aparente de las ventas entre 2013 y 2014. Sin embargo, este comportamiento se debe a que el dataset contiene información completa únicamente para el año 2013, mientras que para 2014 solo se dispone de registros correspondientes a los primeros meses del año. Por esta razón, los valores de 2014 no son directamente comparables con el total anual de 2013. Aun así, el dashboard permite identificar patrones de comportamiento temporal y realizar análisis estacionales mediante operaciones OLAP de drill-down por año, mes y día.
 
 **Análisis por ciudad**: **Quito** lidera ampliamente las ventas totales con valores superiores a $100M, seguida de **Guayaquil** con aproximadamente $30M. Las ciudades medianas (Ambato, Cuenca, Santo Domingo) se ubican entre $5M y $15M. Esto refleja la alta concentración de la actividad comercial en las dos principales urbes del país.
 
