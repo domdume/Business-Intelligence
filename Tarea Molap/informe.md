@@ -158,8 +158,30 @@ ORDER BY
     patient_gender;
 ``` 
 <img width="800" height="286" alt="image" src="https://github.com/user-attachments/assets/6d4b9456-0090-4de2-a1b4-2afa876f5ee8" />
+<p align="center"><i>Figura 15: Vista extendida de los resultados de la segunda consulta analítica.</i></p>
 
 
 ### ¿Por diagnóstico, tipo de seguro,  cuál es el costo promedio por visita y en qué ciudad es más alto?
+
+Esta consulta devolvió 24 combinaciones, donde cáncer con seguro mixto registra el costo promedio más alto ($2.315 00) y siendo Ambato la ciudad con mayor gasto individual
+($4.350,00).
+
+La fractura con seguros tanto privado como público también destaca con costos elevados, mientras que la hipertensión y la diabetes presentan los valores más bajos, coherente con su naturaleza ambulatoria.
+
+<img width="1102" height="868" alt="Image" src="https://github.com/user-attachments/assets/1ddd7069-5df5-49c9-a093-7ce8ccf38c4c" />
+<p align="center"><i>Figura 16: Sentencia SQL para el costo promedio por diagnóstico, tipo de seguro y ciudad más alta.</i></p>
+
+<img width="1188" height="811" alt="Image" src="https://github.com/user-attachments/assets/7ca98805-2b0d-4cff-af7c-42a062d8a2fa" />
+<p align="center"><i>Figura 17: Vista extendida de los 24 resultados obtenidos para la tercera consulta analítica.</i></p>
+
 ## Referencias Bibliográficas
+
+[1] Escuela Politécnica Nacional, "Clase 6: Business Intelligence — OLAP," material de clase, Quito, Ecuador, 2025.
+
+[3] Escuela Politécnica Nacional, "Guía para Implementar una Vista Multidimensional de Datos en PostgreSQL," *Aulas Virtuales EPN*, 2025. [Online]. Available:
+https://aulasvirtuales.epn.edu.ec/pluginfile.php/16280755/mod_resource/content/2/guia_olap_postgresql.html
+
+[2] PostgreSQL Global Development Group, "PostgreSQL 16 Documentation," 2024.
+[Online]. Available: https://www.postgresql.org/docs/current/
+
 ## Declaración de uso de IA
