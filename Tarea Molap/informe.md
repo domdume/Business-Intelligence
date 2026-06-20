@@ -21,6 +21,10 @@
 4. [Referencias bibliográficas](#referencias-bibliográficas)
 5. [Declaración de uso de IA](#declaración-de-uso-de-ia)
 ## Introducción
+
+En el entorno actual de la gestión de la salud, las instituciones médicas generan masivos volúmenes de datos transaccionales diariamente. Sin embargo, transformar estos registros operativos en conocimiento estratégico representa un desafío crítico. El Business Intelligence (BI) surge como la disciplina fundamental para abordar esta problemática, proveyendo herramientas y metodologías capaces de consolidar, procesar y analizar la información para optimizar la toma de decisiones clínicas, financieras y administrativas.
+
+El presente informe documenta el desarrollo práctico de una Tarea MOLAP aplicada al sector sanitario. El proyecto aborda el diseño e implementación de un Modelo en Estrella, el cual utiliza una tabla de hechos central operativa (`fact_visitas_salud`) con un conjunto de dimensiones que capturan la demografía de los pacientes, las especialidades médicas, los diagnósticos y las temporalidades. Asimismo, se detalla la configuración de una vista materializada como estrategia de optimización física, y se exponen diversas consultas analíticas orientadas a resolver interrogantes críticas de negocio, tales como la distribución de costos institucionales y el comportamiento geográfico de las emergencias médicas. 
 ## Desarrollo
 ### Modelo estrella
 ### Dimensiones
@@ -113,6 +117,48 @@ Se ejecutó una consulta analítica multidimensional extrayendo los datos consol
 
 
 ### ¿Qué ciudad tuvo más emergencias por mes y género?
+Quito es la ciudad que aparece con mayor frecuencia liderando las emergencias en los distintos meses y géneros (destacando especialmente en febrero para el género masculino con 5 casos), mientras que ciudades como Guayaquil, Loja y Ambato lideran en meses o géneros específicos. 
+
+*Consulta ejecutada* 
+```
+WITH emergencias AS (
+    SELECT 
+        periodo_mes,
+        patient_gender,
+        city,
+        COUNT(*) AS total_emergencias
+    FROM mv_salud_visitas
+    WHERE is_emergency = TRUE
+    GROUP BY 
+        periodo_mes,
+        patient_gender,
+        city
+),
+ranking AS (
+    SELECT 
+        periodo_mes,
+        patient_gender,
+        city,
+        total_emergencias,
+        RANK() OVER (
+            PARTITION BY periodo_mes, patient_gender
+            ORDER BY total_emergencias DESC
+        ) AS posicion
+    FROM emergencias
+)
+SELECT 
+    periodo_mes,
+    patient_gender,
+    city,
+    total_emergencias
+FROM ranking
+WHERE posicion = 1
+ORDER BY 
+    periodo_mes,
+    patient_gender;
+``` 
+<img width="800" height="286" alt="image" src="https://github.com/user-attachments/assets/6d4b9456-0090-4de2-a1b4-2afa876f5ee8" />
+
 
 ### ¿Por diagnóstico, tipo de seguro,  cuál es el costo promedio por visita y en qué ciudad es más alto?
 ## Referencias Bibliográficas
