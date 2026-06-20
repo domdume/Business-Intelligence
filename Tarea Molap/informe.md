@@ -178,10 +178,10 @@ La fractura con seguros tanto privado como público también destaca con costos 
 
 [1] Escuela Politécnica Nacional, "Clase 6: Business Intelligence — OLAP," material de clase, Quito, Ecuador, 2025.
 
-[3] Escuela Politécnica Nacional, "Guía para Implementar una Vista Multidimensional de Datos en PostgreSQL," *Aulas Virtuales EPN*, 2025. [Online]. Available:
+[2] Escuela Politécnica Nacional, "Guía para Implementar una Vista Multidimensional de Datos en PostgreSQL," *Aulas Virtuales EPN*, 2025. [Online]. Available:
 https://aulasvirtuales.epn.edu.ec/pluginfile.php/16280755/mod_resource/content/2/guia_olap_postgresql.html
 
-[2] PostgreSQL Global Development Group, "PostgreSQL 16 Documentation," 2024.
+[3] PostgreSQL Global Development Group, "PostgreSQL 16 Documentation," 2024.
 [Online]. Available: https://www.postgresql.org/docs/current/
 
 ## Declaración de uso de IA
