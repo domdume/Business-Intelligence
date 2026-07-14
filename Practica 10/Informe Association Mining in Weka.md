@@ -84,6 +84,16 @@ Los resultados obtenidos tras ejecutar el algoritmo Apriori sobre el conjunto de
 #### **Ejercicio 10.8**
 -----------
 #### **Ejercicio 10.9**
+
+1. Primero empezamos creando el Dataset dentro de Excel. En total 60 registros.
+
+<img width="515" height="702" alt="image" src="https://github.com/user-attachments/assets/c0d56cb5-1304-49c8-994a-b32871fd735f" />
+
+2. Reemplazar los primeros 12 registros de la columna MST (filas 2 a 13) por la letra H.
+
+3. Reemplace los últimos 12 registros (filas 50 a 61) por la letra L.
+
+4. Reemplace los 36 registros restantes por la letra M.
 -----------
 
 #### Resultados 
