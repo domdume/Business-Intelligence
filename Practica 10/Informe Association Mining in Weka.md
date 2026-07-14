@@ -52,6 +52,33 @@ La regla Jam (**Cornflake**) resulta ser la más relevante dentro del conjunto d
 
 -----------
 #### **Ejercicio 10.7**
+Primero empezamos creando el Dataset dentro de Excel y se tabulan los datos.
+<img width="772" height="197" alt="image" src="https://github.com/user-attachments/assets/aba3e729-9dff-45e0-9d2b-2a0922198feb" />
+
+Luego se guarda como archivo CSV con el nombre de DailyItem2 Dataset.
+<img width="931" height="193" alt="image" src="https://github.com/user-attachments/assets/ad2f09f6-b323-4161-b4b7-5e8ba8c4d1d0" />
+
+Desde la interfaz principal de Weka, se ingresa al módulo "Explorer" y, en la pestaña "Preprocess", se emplea el botón "Open file" para seleccionar y cargar el archivo CSV recién creado. Una vez cargado, la herramienta muestra la lista completa de atributos presentes.
+<img width="597" height="417" alt="image" src="https://github.com/user-attachments/assets/19c03a35-c950-4618-96d8-2b3662e771d3" />
+
+<img width="1262" height="938" alt="image" src="https://github.com/user-attachments/assets/497bcecb-6707-4b78-9622-768ed9547022" />
+
+Debido a que el algoritmo Apriori no opera directamente con valores numéricos, se aplica un filtro de conversión. Se hace clic en "Choose" y se sigue la ruta: filters → unsupervised → Numeric to Nominal. Luego, se presiona "Apply" para efectuar la transformación sobre todas las variables del conjunto.
+<img width="1252" height="767" alt="image" src="https://github.com/user-attachments/assets/b513dae7-c142-46b6-b296-263138419bed" />
+
+El campo "Transaction" se elimina del análisis, ya que no representa un elemento de interés para la minería de asociaciones. Para ello, se selecciona en el panel izquierdo y se pulsa el botón "Remove".
+<img width="631" height="567" alt="image" src="https://github.com/user-attachments/assets/156c0e60-c743-4ac2-a76f-f696fd66a0d4" />
+
+En la pestaña "Associate", se selecciona el algoritmo Apriori desde el menú correspondiente. Al hacer clic sobre el nombre del algoritmo, se abre el Editor Genérico de Objetos, donde se configuran los valores y se confirma haciendo clic en "OK"..
+<img width="937" height="872" alt="image" src="https://github.com/user-attachments/assets/063fb3e9-6b60-4ab6-a3e5-9daf02d7c2c3" />
+
+Se activa el algoritmo presionando el botón "Start". Weka procesa los datos y muestra en el panel de salida las reglas de asociación generadas conforme a los parámetros establecidos.
+<img width="1251" height="868" alt="image" src="https://github.com/user-attachments/assets/8dba7292-f3da-48b6-8e28-f51afb58f06a" />
+
+Se examinan las reglas generadas, verificando que coinciden con las obtenidas en el capítulo anterior mediante la aplicación manual del algoritmo Apriori. Se destaca la presencia de reglas como Pan → Mermelada y Cornflakes → Mermelada, entre otras, todas con niveles de confianza iguales o superiores al 75%.
+
+**Análisis**
+Los resultados obtenidos tras ejecutar el algoritmo Apriori sobre el conjunto de datos DailyItem Dataset permitieron identificar cuatro reglas de asociación principales: Pan → Mermelada, Mermelada → Pan, Cornflakes → Mermelada y Mermelada → Cornflakes. La confianza de cada regla se calcula dividiendo el soporte conjunto de ambos productos entre el soporte del producto que aparece en el lado izquierdo de la regla, obteniéndose valores del 75% para tres de ellas (Pan → Mermelada, Mermelada → Pan y Mermelada → Cornflakes) y un 100% para la regla Cornflakes → Mermelada. Dado que todas superan el umbral mínimo de confianza establecido (75%), son consideradas reglas válidas.
 
 -----------
 #### **Ejercicio 10.8**
