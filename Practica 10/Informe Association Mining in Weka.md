@@ -190,7 +190,7 @@ Repetir desde el paso 1 al 5 para las siguientes columnas. De este modo se obten
 
 <img width="725" height="661" alt="image" src="https://github.com/user-attachments/assets/ac79734a-af5f-4b2b-8f88-4ed3b4b68dc8" />
 
-Por último, se debe guardar este archivo con terminación .cvs
+Por último, se debe guardar este archivo con terminación .csv.
 
 6. Abrir el archivo .cvs en Weka Explorer.
 
@@ -202,7 +202,7 @@ Por último, se debe guardar este archivo con terminación .cvs
 <img width="935" height="652" alt="image" src="https://github.com/user-attachments/assets/989b3521-c331-48a6-86c2-f1a72d2afc21" />
 
 A continuación se abrirá una ventana emergente:
-- Buscar el campo llamado fieldSeparator (que tendrá una coma ,).
+- Buscar el campo llamado fieldSeparator (que tendrá una coma).
 - Borrar la coma "," y escribir un punto y coma ";".
 - Hacer clic en el botón OK.
 
@@ -211,6 +211,25 @@ A continuación se abrirá una ventana emergente:
 El archivo en Weka se mostrará de la siguiente forma:
 
 <img width="1272" height="948" alt="image" src="https://github.com/user-attachments/assets/dae4c83a-1226-44a8-b99e-9547e7a610d1" />
+
+
+7. Ir a la pestaña "Associate", seleccionar el algoritmo y activar "car".
+
+- Ir a "Choose" y seleccionar el algoritmo "PredictiveApriori" o "Apriori".
+- Hacer un clic izquierdo directamente sobre el texto del algoritmo para abrir una ventana de propiedades y configurar los siguientes valores:
+-- car: Cambiar de False a True (Las reglas apuntarán únicamente a la nota final Grade).
+-- lowerBoundMinSupport: Cmabiar de 0.1 a 0.05 (esto baja el soporte mínimo para que acepte patrones que se repiten un poco menos).
+-- minMetric: Cambiar de 0.9 a 0.7 (esto disminuye la confianza mínima requerida, permitiendo que Weka muestre reglas muy buenas que no alcanzan el $90\%$ pero siguen siendo precisas).
+-- numRules: Cambiar de 10 a 20 (mostrará las mejores 20 reglas).
+- Haz clic en OK.
+
+<img width="892" height="937" alt="image" src="https://github.com/user-attachments/assets/ac9915cc-a2cd-4e37-bff5-929be3743f07" />
+
+8. Hacer clic en "Start" y analizar las primeras reglas.
+
+<img width="1007" height="923" alt="image" src="https://github.com/user-attachments/assets/998648d6-cc6f-4e0e-ad39-de7a1cf11471" />
+
+9. 
 
 
 -----------
