@@ -213,23 +213,30 @@ El archivo en Weka se mostrará de la siguiente forma:
 <img width="1272" height="948" alt="image" src="https://github.com/user-attachments/assets/dae4c83a-1226-44a8-b99e-9547e7a610d1" />
 
 
-7. Ir a la pestaña "Associate", seleccionar el algoritmo y activar "car".
+7. Configuración del Algoritmo en la pestaña "Associate".
 
-- Ir a "Choose" y seleccionar el algoritmo "PredictiveApriori" o "Apriori".
-- Hacer un clic izquierdo directamente sobre el texto del algoritmo para abrir una ventana de propiedades y configurar los siguientes valores:
--- car: Cambiar de False a True (Las reglas apuntarán únicamente a la nota final Grade).
--- lowerBoundMinSupport: Cmabiar de 0.1 a 0.05 (esto baja el soporte mínimo para que acepte patrones que se repiten un poco menos).
--- minMetric: Cambiar de 0.9 a 0.7 (esto disminuye la confianza mínima requerida, permitiendo que Weka muestre reglas muy buenas que no alcanzan el $90\%$ pero siguen siendo precisas).
--- numRules: Cambiar de 10 a 20 (mostrará las mejores 20 reglas).
-- Haz clic en OK.
+* **Paso 1: Selección del algoritmo**
+    * Ir a la pestaña **Associate**.
+    * Hacer clic en el botón **Choose** y seleccionar el algoritmo **PredictiveApriori** o **Apriori**.
+
+* **Paso 2: Configuración de propiedades avanzadas**
+    * Hacer clic izquierdo directamente sobre el texto del algoritmo para abrir la ventana de propiedades.
+    * Configurar los siguientes valores dentro del panel:
+        * **`car`**: Cambiar de *False* a **`True`** (Las reglas apuntarán únicamente a la nota final `Grade`).
+        * **`lowerBoundMinSupport`**: Cambiar de `0.1` a **`0.05`** (Esto baja el soporte mínimo para que acepte patrones que se repiten un poco menos).
+        * **`minMetric`**: Cambiar de `0.9` a **`0.7`** (Esto disminuye la confianza mínima requerida, permitiendo que Weka muestre reglas muy buenas que no alcanzan el 90% pero siguen siendo precisas).
+        * **`numRules`**: Cambiar de `10` a **`20`** (Mostrará las mejores 20 reglas).
+
+* **Paso 3: Aplicación de cambios**
+    * Haz clic en **OK**.
 
 <img width="892" height="937" alt="image" src="https://github.com/user-attachments/assets/ac9915cc-a2cd-4e37-bff5-929be3743f07" />
 
-8. Hacer clic en "Start" y observar las primeras reglas.
+8. Hacer clic en "Start" y observar las reglas.
 
 <img width="1007" height="923" alt="image" src="https://github.com/user-attachments/assets/998648d6-cc6f-4e0e-ad39-de7a1cf11471" />
 
-9. Ejercicio: Intercambiar valores nomiales "M" por "?"
+9. Ejercicio: Intercambiar valores nominales "M" por "?".
 
 - En el archivo excel, seleccionar todos los datos, realizar ctrl + L y en la ventana emergente en la pestaña "Reemplazar" colocar "M" en la sección Buscar y "?" en la sección Reemplazar.
 
@@ -241,10 +248,29 @@ El archivo en Weka se mostrará de la siguiente forma:
 
 Guardar el archivo en csv y realizar todos los pasos desde el 1 al 8 con este nuevo archivo sin valores M.
 
-Al ejecutar, este esrá el resultado:
+Al ejecutar, este será el resultado:
 
+<img width="1108" height="957" alt="image" src="https://github.com/user-attachments/assets/a0a9d4ab-cb3a-4912-9705-1b6b7d6a1bc9" />
 
+**Análisis:**
 
+**Fase Inicial**: Al transformar las calificaciones numéricas continuas en rangos ordenados (**L**, **M**, **H**), el algoritmo adquiere la capacidad de agrupar registros bajo criterios de distribución estadística (percentiles). Sin embargo, tener en cuenta que aplicar una división matemática estricta (20% - 60% - 20%) sin auditar los valores duplicados genera inconsistencias lógicas (como asignar a un alumno con nota `11.5` la etiqueta **L** y a otro con la misma nota la etiqueta **M**). El ajuste manual de los puntos de corte resolvió esto.
+
+**Comparativa de los Modelos Generados**:
+
+| Métrica / Comportamiento | Experimento 1: Dataset Completo (con "M") | Experimento 2: Dataset Filtrado (M -> "?") |
+| :--- | :--- | :--- |
+| **Volumen de Reglas** | Generó el top 20 de reglas configuradas. | Redujo drásticamente el espacio a **7 reglas únicas**. |
+| **Complejidad de Itemsets** | Alta densidad en combinaciones intermedias. | Filtrado radical; simplificación de patrones estructurados. |
+| **Enfoque Analítico** | Tendencia al rendimiento promedio. | Foco exclusivo en **extremos de rendimiento**. |
+
+**Interpretación de las Reglas de Asociación Finales**: Al sustituir la categoría **M** por valores faltantes (`?`), Weka ignoró el "ruido" del 60% de la población estudiantil promedio.
+
+- La combinación `MST=L` y `Quiz=L` implica una confianza del **100% (conf: 1)** de obtener un `Grade=E` (reprobación). Demuestra que el desempeño deficiente en las primeras semanas del curso significa pérdida de la materia, volviendo innecesaria la evaluación del examen final para anticipar este resultado.
+- Cuando un estudiante acumula deficiencias en el examen parcial, el laboratorio y el examen final (`MST=L`, `Lab=L`, `ENDSEM=L`), la probabilidad de reprobación es del **88%**. Esto expone que reprobar el componente práctico (`Lab`) elimina la última red de seguridad académica del alumno.
+- La única regla de aprobación que sobrevivió al filtrado fue `Lab=H ==> Grade=B` (Confianza: 0.8). Estadísticamente, esto demuestra que un rendimiento alto en el laboratorio es importante para asegurar el éxito en la materia, llegando a mitigar deficiencias en otras evaluaciones teóricas.
+
+El ejercicio demuestra que mantener los datos promedio (`M`) satura el algoritmo con patrones obvios e irrelevantes. La estrategia de enmascaramiento (`?`) optimiza el algoritmo Apriori, transformándolo en una herramienta de **analítica predictiva** capaz de aislar las causas críticas del éxito y del fracaso estudiantil para el diseño de estrategias de intervención docente oportunas.
 
 -----------
 
