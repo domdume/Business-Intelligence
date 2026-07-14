@@ -99,6 +99,61 @@ Los resultados obtenidos tras ejecutar el algoritmo Apriori sobre el conjunto de
 
 -----------
 #### **Ejercicio 10.8**
+
+Inicialmente, se construyó el conjunto de datos DailyItem_Marks_Dataset en formato CSV a partir de los registros de calificaciones. Tras cargar el archivo en el entorno Explorer de Weka (pestaña Preprocess), se procedió a eliminar las variables identificadoras que no aportan valor predictivo para las reglas de asociación. Específicamente, se eliminaron los atributos "Roll No" y "Name", conservando únicamente las variables numéricas correspondientes a las notas y la variable categórica "Grade" (como se observa en la primera y segunda imagen de referencia).
+<img width="975" height="717" alt="image" src="https://github.com/user-attachments/assets/77b73846-2f2e-4fef-92e3-bed49f50e35a" />
+<img width="797" height="398" alt="image" src="https://github.com/user-attachments/assets/b15d396d-33eb-442e-ada8-6dec5a7eb514" />
+
+##### Proceso de Discretización
+Dado que los algoritmos de asociación como Apriori requieren que todos los datos sean nominales (categóricos) y no continuos, fue necesario transformar las calificaciones numéricas.
+
+Para ello, se aplicó el filtro no supervisado Discretize (ruta: weka.filters.unsupervised.attribute.Discretize). Se configuró el filtro a través del Generic Object Editor con los siguientes parámetros clave:
+
+<img width="975" height="913" alt="image" src="https://github.com/user-attachments/assets/abe96821-211c-4dd1-8b87-758e2d920109" />
+
+- bins = 3: Para dividir las calificaciones numéricas en tres categorías (que pueden interpretarse como bajo, medio y alto).
+
+- useEqualFrequency = True: Para garantizar que cada categoría contenga aproximadamente la misma cantidad de estudiantes (un tercio del total por rango), evitando sesgos hacia un grupo específico.
+
+<img width="751" height="956" alt="image" src="https://github.com/user-attachments/assets/89ecb488-ea49-4807-9c0a-ef4194885727" />
+
+Al aplicar el filtro, Weka transformó con éxito los valores continuos en rangos. Por ejemplo, la variable MST(20.0) quedó dividida en los siguientes intervalos nominales: (-inf-12.5], (12.5-16.5] y (16.5-inf).
+
+<img width="975" height="506" alt="image" src="https://github.com/user-attachments/assets/d94acb59-21c2-456a-b693-b6abe159d332" />
+
+Con los datos discretizados, se procedió a la pestaña Associate para generar las reglas de asociación. Se utilizó el algoritmo Apriori con su configuración por defecto.
+
+<img width="975" height="407" alt="image" src="https://github.com/user-attachments/assets/f1ca8c89-977b-4193-844d-41827d057847" />
+
+
+El algoritmo generó un modelo basado en el conjunto de entrenamiento completo, identificando patrones con alta consistencia. Todas las reglas del "Top 10" devueltas por Weka presentan una métrica de confianza (conf) de 1 (100%), lo que indica una asociación determinista dentro de este conjunto de datos.
+
+A continuación, se interpretan las principales asociaciones encontradas:
+
+- Regla 1 y Regla 2 (Asociación Fuerte Bidireccional):
+
+Quiz(15)='(-inf-5.25]' 11 ==> MST(20.0)='(-inf-12.5]' 11
+
+MST(20.0)='(-inf-12.5]' 11 ==> Quiz(15)='(-inf-5.25]' 11
+
+Interpretación: Existe una correspondencia directa en el rendimiento bajo. Los 11 estudiantes que obtuvieron una calificación baja en el Quiz (5.25 o menos) también obtuvieron una calificación baja en el examen parcial MST (12.5 o menos), y viceversa.
+
+- Regla 4 y Regla 5 (Correspondencia de Rendimiento Alto):
+
+Total(100.0)='(66.25-inf)' 10 ==> MST(20.0)='(16.5-inf)' 10
+
+MST(20.0)='(16.5-inf)' 10 ==> Total(100.0)='(66.25-inf)' 10
+
+Interpretación: Existe una relación perfecta entre obtener una alta calificación total y un alto rendimiento en el parcial. Los 10 estudiantes que alcanzaron un puntaje total alto (mayor a 66.25) también obtuvieron una nota alta en su examen MST (mayor a 16.5), y viceversa.
+
+- Regla 9 (Asociación de Múltiples Condiciones):
+
+Quiz(15)='(-inf-5.25]' ENDSEM(45.0)='(-inf-18.5]' 10 ==> MST(20.0)='(-inf-12.5]' 10
+
+Interpretación: Si un estudiante presenta un bajo rendimiento combinado en el Quiz (menor o igual a 5.25) y en el examen final ENDSEM (menor o igual a 18.5), se asocia indefectiblemente a un rendimiento bajo en el parcial MST (menor o igual a 12.5).
+
+En general, las reglas extraídas por el algoritmo demuestran que el rendimiento académico de los estudiantes analizados es altamente consistente a lo largo del periodo; es decir, las calificaciones bajas en componentes específicos (como el Quiz o el MST) son fuertes predictores de calificaciones bajas en otras evaluaciones o en el total acumulado, de la misma forma que ocurre con las calificaciones altas.
+
 -----------
 #### **Ejercicio 10.9**
 
