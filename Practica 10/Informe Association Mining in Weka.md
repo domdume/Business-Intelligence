@@ -157,12 +157,9 @@ En general, las reglas extraídas por el algoritmo demuestran que el rendimiento
 -----------
 #### **Ejercicio 10.9**
 
-Detalles iniciales del archivo:
-
+1. Primero empezamos creando el Dataset dentro de Excel. En total 60 registros.
 - Contiene las columnas: MST(20.0), Quiz (15), Lab(20.0), y ENDSEM(45.0).
 - Datos ordenados: Los registros de la columna MST se encuentran ordenados de mayor a menor.
-
-1. Primero empezamos creando el Dataset dentro de Excel. En total 60 registros.
 
 <img width="535" height="661" alt="image" src="https://github.com/user-attachments/assets/719df5c3-e886-4556-99f9-8622dcd6be8b" />
 
@@ -189,12 +186,31 @@ Problema: Se tiene dos estudiantes con la misma nota exacta (16.5), pero uno tie
 
 <img width="407" height="247" alt="image" src="https://github.com/user-attachments/assets/52ee86ab-ad1b-4974-979a-9a969824fd18" />
 
-Repetir desde el paso 2 al 5 para las siguientes columnas. De este modo se obtendrá una tabla con valores nominales:
+Repetir desde el paso 1 al 5 para las siguientes columnas. De este modo se obtendrá una tabla con valores nominales:
 
 <img width="725" height="661" alt="image" src="https://github.com/user-attachments/assets/ac79734a-af5f-4b2b-8f88-4ed3b4b68dc8" />
 
+Por último, se debe guardar este archivo con terminación .cvs
 
+6. Abrir el archivo .cvs en Weka Explorer.
 
+- Dar clic en "Open File", en "Files of Type" cambiar a .csv.
+- Marcar casilla "Invoke options dialog" en la esquina superior derecha.
+- Hacer clic izquierdo normal sobre el archivo preparado en los anteriores pasos "Datos_Discretizados_Ejercicio10_9" para seleccionarlo.
+- Hacer clic en el botón Abrir.
+
+<img width="935" height="652" alt="image" src="https://github.com/user-attachments/assets/989b3521-c331-48a6-86c2-f1a72d2afc21" />
+
+A continuación se abrirá una ventana emergente:
+- Buscar el campo llamado fieldSeparator (que tendrá una coma ,).
+- Borrar la coma "," y escribir un punto y coma ";".
+- Hacer clic en el botón OK.
+
+<img width="590" height="701" alt="image" src="https://github.com/user-attachments/assets/5613d0cd-177b-48da-9dc3-41e013890c0e" />
+
+El archivo en Weka se mostrará de la siguiente forma:
+
+<img width="1272" height="948" alt="image" src="https://github.com/user-attachments/assets/dae4c83a-1226-44a8-b99e-9547e7a610d1" />
 
 
 -----------
