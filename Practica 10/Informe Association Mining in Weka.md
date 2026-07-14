@@ -225,11 +225,25 @@ El archivo en Weka se mostrará de la siguiente forma:
 
 <img width="892" height="937" alt="image" src="https://github.com/user-attachments/assets/ac9915cc-a2cd-4e37-bff5-929be3743f07" />
 
-8. Hacer clic en "Start" y analizar las primeras reglas.
+8. Hacer clic en "Start" y observar las primeras reglas.
 
 <img width="1007" height="923" alt="image" src="https://github.com/user-attachments/assets/998648d6-cc6f-4e0e-ad39-de7a1cf11471" />
 
-9. 
+9. Ejercicio: Intercambiar valores nomiales "M" por "?"
+
+- En el archivo excel, seleccionar todos los datos, realizar ctrl + L y en la ventana emergente en la pestaña "Reemplazar" colocar "M" en la sección Buscar y "?" en la sección Reemplazar.
+
+<img width="1235" height="691" alt="image" src="https://github.com/user-attachments/assets/2f1302b7-f6dc-4249-ad6d-921ba4fe98ce" />
+
+- Hacer clic en "Reemplazar todos"
+
+<img width="1395" height="740" alt="image" src="https://github.com/user-attachments/assets/6324220d-5633-4022-9b8d-a0f46eef4043" />
+
+Guardar el archivo en csv y realizar todos los pasos desde el 1 al 8 con este nuevo archivo sin valores M.
+
+Al ejecutar, este esrá el resultado:
+
+
 
 
 -----------
