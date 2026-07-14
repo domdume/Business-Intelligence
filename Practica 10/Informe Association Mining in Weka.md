@@ -111,17 +111,35 @@ Detalles iniciales del archivo:
 
 <img width="535" height="661" alt="image" src="https://github.com/user-attachments/assets/719df5c3-e886-4556-99f9-8622dcd6be8b" />
 
-2. Reemplazar los primeros 12 registros de la columna MST (filas 2 a 13) por la letra H.
+2. Reemplazar los primeros 12 registros de la columna MST (filas 2 a 13) por la letra H. (20%)
 
 <img width="570" height="331" alt="image" src="https://github.com/user-attachments/assets/10805809-b30a-40a8-87ca-4162f9964d84" />
 
-3. Reemplace los últimos 12 registros (filas 50 a 61) por la letra L.
+3. Reemplace los últimos 12 registros (filas 50 a 61) por la letra L. (20%)
 
 <img width="552" height="293" alt="image" src="https://github.com/user-attachments/assets/aa6ec915-32fe-464a-9c80-a67961f91dd5" />
 
-4. Reemplace los 36 registros restantes por la letra M.
+4. Reemplace los 36 registros restantes por la letra M. (60%)
 
 <img width="572" height="312" alt="image" src="https://github.com/user-attachments/assets/071c9020-ca60-4219-a0be-d99be5357033" />
+
+Problema: Se tiene dos estudiantes con la misma nota exacta (16.5), pero uno tiene H y el otro M. Esto es un error en minería de datos porque el valor numérico no puede pertenecer a dos clases distintas al mismo tiempo. Como el corte original fue en la fila 13, y la fila 14 repite el mismo valor, la regla obliga a desplazar el corte hacia abajo para incluir a todos los que tengan 16.5 en el grupo superior.
+
+5. Corregir cortes de acuerdo a la regla de minería de datos.
+- Cambiar el valor de la celda A14 de M a H. Ahora se tendrá 13 registros con H en total (del registro 2 al 14).
+
+<img width="292" height="346" alt="image" src="https://github.com/user-attachments/assets/6163332f-d2a6-42f2-9283-d59ed0bda1d5" />
+
+- Cambiar las celdas A50 y A51 de L a M. De esta forma, el grupo L comenzará recién en la fila 52 (donde la nota de MST baja a 10.5), quedándote exactamente 10 registros con L (de la fila 52 a la 61).
+
+<img width="407" height="247" alt="image" src="https://github.com/user-attachments/assets/52ee86ab-ad1b-4974-979a-9a969824fd18" />
+
+Repetir desde el paso 2 al 5 para las siguientes columnas. De este modo se obtendrá una tabla con valores nominales:
+
+<img width="725" height="661" alt="image" src="https://github.com/user-attachments/assets/ac79734a-af5f-4b2b-8f88-4ed3b4b68dc8" />
+
+
+
 
 
 -----------
