@@ -85,15 +85,28 @@ Los resultados obtenidos tras ejecutar el algoritmo Apriori sobre el conjunto de
 -----------
 #### **Ejercicio 10.9**
 
+Detalles iniciales del archivo:
+
+- Contiene las columnas: MST(20.0), Quiz (15), Lab(20.0), y ENDSEM(45.0).
+- Datos ordenados: Los registros de la columna MST se encuentran ordenados de mayor a menor.
+
 1. Primero empezamos creando el Dataset dentro de Excel. En total 60 registros.
 
-<img width="515" height="702" alt="image" src="https://github.com/user-attachments/assets/c0d56cb5-1304-49c8-994a-b32871fd735f" />
+<img width="535" height="661" alt="image" src="https://github.com/user-attachments/assets/719df5c3-e886-4556-99f9-8622dcd6be8b" />
 
 2. Reemplazar los primeros 12 registros de la columna MST (filas 2 a 13) por la letra H.
 
+<img width="570" height="331" alt="image" src="https://github.com/user-attachments/assets/10805809-b30a-40a8-87ca-4162f9964d84" />
+
 3. Reemplace los últimos 12 registros (filas 50 a 61) por la letra L.
 
+<img width="552" height="293" alt="image" src="https://github.com/user-attachments/assets/aa6ec915-32fe-464a-9c80-a67961f91dd5" />
+
 4. Reemplace los 36 registros restantes por la letra M.
+
+<img width="572" height="312" alt="image" src="https://github.com/user-attachments/assets/071c9020-ca60-4219-a0be-d99be5357033" />
+
+
 -----------
 
 #### Resultados 
